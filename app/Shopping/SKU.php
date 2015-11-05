@@ -25,7 +25,7 @@ class SKU implements SKUInterface, Jsonable, Arrayable, PriceAware
     protected $id;
 
     /**
-     * @var
+     * @varbill_items
      */
     protected $name;
 
@@ -93,7 +93,7 @@ class SKU implements SKUInterface, Jsonable, Arrayable, PriceAware
      */
     public function originPrice()
     {
-        return $this->originPrice;
+        return floatval($this->originPrice);
     }
 
     /**
