@@ -11,9 +11,12 @@ namespace App\Payment;
 
 use App\Contracts\Paying\BillItem;
 use App\Contracts\Paying\Bill as BillInterface;
+use Illuminate\Contracts\Support\Arrayable;
 
-class Bill implements BillInterface
+class Bill implements BillInterface, Arrayable
 {
+
+    protected $id;
 
     /**
      * @var BillItem[]
@@ -21,6 +24,11 @@ class Bill implements BillInterface
     protected $billItem = [];
 
     protected $price;
+
+    public function id()
+    {
+        return $this->id;
+    }
 
     /**
      * @param BillItem $billItem
@@ -42,5 +50,18 @@ class Bill implements BillInterface
         }
 
         return $this->price;
+    }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'id'           => $this->id(),
+            'price'        => $this->price(),
+        ];
     }
 }
