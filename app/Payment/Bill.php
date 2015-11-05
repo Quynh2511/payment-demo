@@ -10,7 +10,7 @@ namespace App\Payment;
 
 
 use App\Contracts\Paying\BillItem;
-use App\Contracts\Paying\BillInterface;
+use App\Contracts\Paying\Bill as BillInterface;
 
 class Bill implements BillInterface
 {
