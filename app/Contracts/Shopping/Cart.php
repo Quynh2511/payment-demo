@@ -15,9 +15,15 @@ interface Cart
     public function setCartItem(CartItem $cartItem);
 
     /**
+     * @param int $skuId
      * @return CartItem
      */
-    public function cartItem();
+    public function cartItem($skuId);
+
+    /**
+     * @return CartItem[]
+     */
+    public function all();
 
     /**
      * @param $skuId
