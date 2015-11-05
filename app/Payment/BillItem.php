@@ -5,13 +5,27 @@ namespace App\Payment;
 
 class BillItem implements \App\Contracts\Paying\BillItem
 {
+    protected $name;
+
+    protected $quantity;
+
+    protected $price;
+
+    protected $totalAmount;
+
+    public function __construct($name, $quantity, $price)
+    {
+        $this->name     = $name;
+        $this->quantity = $quantity;
+        $this->price    = $price;
+    }
 
     /**
      * @return string
      */
     public function name()
     {
-        // TODO: Implement name() method.
+        return $this->name;
     }
 
     /**
@@ -19,7 +33,7 @@ class BillItem implements \App\Contracts\Paying\BillItem
      */
     public function quantity()
     {
-        // TODO: Implement quantity() method.
+       return $this->quantity;
     }
 
     /**
@@ -27,7 +41,7 @@ class BillItem implements \App\Contracts\Paying\BillItem
      */
     public function price()
     {
-        // TODO: Implement price() method.
+        return $this->price;
     }
 
     /**
@@ -35,6 +49,7 @@ class BillItem implements \App\Contracts\Paying\BillItem
      */
     public function totalAmount()
     {
-        // TODO: Implement totalAmount() method.
+        $this->totalAmount = $this->price * $this->quantity;
+        return $this->totalAmount;
     }
 }
