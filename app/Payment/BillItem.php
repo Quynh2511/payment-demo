@@ -5,14 +5,31 @@ namespace App\Payment;
 
 class BillItem implements \App\Contracts\Paying\BillItem
 {
+    /**
+     * @var String
+     */
     protected $name;
 
+    /**
+     * @var int
+     */
     protected $quantity;
 
+    /**
+     * @var float
+     */
     protected $price;
 
+    /**
+     * @var float
+     */
     protected $totalAmount;
 
+    /**
+     * @param $name
+     * @param $quantity
+     * @param $price
+     */
     public function __construct($name, $quantity, $price)
     {
         $this->name     = $name;
