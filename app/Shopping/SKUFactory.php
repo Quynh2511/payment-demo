@@ -10,6 +10,7 @@ class SKUFactory
     {
         $this->priceAspectDecorator = $priceAspectDecorator;
     }
+
     public function buildOne($rawData)
     {
         if ( ! count($rawData)) return null;
