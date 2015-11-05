@@ -26,18 +26,6 @@ class BillItem implements \App\Contracts\Paying\BillItem
     protected $totalAmount;
 
     /**
-     * @param $name
-     * @param $quantity
-     * @param $price
-     */
-    public function __construct($name, $quantity, $price)
-    {
-        $this->name     = $name;
-        $this->quantity = $quantity;
-        $this->price    = $price;
-    }
-
-    /**
      * @return string
      */
     public function name()
@@ -59,6 +47,36 @@ class BillItem implements \App\Contracts\Paying\BillItem
     public function price()
     {
         return $this->price;
+    }
+
+    /**
+     * @param $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @param $quantity
+     * @return self
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * @param $price
+     * @return self
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
     }
 
     /**
