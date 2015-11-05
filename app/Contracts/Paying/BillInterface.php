@@ -6,7 +6,7 @@ namespace App\Contracts\Paying;
  * Interface Bill
  * @package App\Contracts\Paying
  */
-interface Bill
+interface BillInterface
 {
     /**
      * @param BillItem $billItem
