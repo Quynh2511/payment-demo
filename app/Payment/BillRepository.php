@@ -9,21 +9,22 @@
 namespace App\Payment;
 
 
+use Illuminate\Database\Connection;
+
 class BillRepository
 {
     protected $connection;
 
     protected $factory;
 
-    public function __construct(Connection $connection, BillFactory $factory)
+    public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        $this->factory    = $factory;
     }
 
     public function insert(Bill $bill)
     {
-        DB::table('bills')->insert(
+        $this->connection->table('bills')->insert(
             $bill->toArray()
         );
     }

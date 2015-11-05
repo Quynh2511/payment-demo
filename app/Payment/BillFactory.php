@@ -11,5 +11,4 @@ namespace App\Payment;
 
 class BillFactory
 {
-
 }

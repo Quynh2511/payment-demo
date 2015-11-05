@@ -18,3 +18,19 @@ Route::get('/sku/{id}', function (\App\Shopping\SKURepository $repository, $id) 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/billinsert', function (\App\Payment\BillRepository $repository) {
+
+    $bill = new \App\Payment\Bill();
+
+    $billItem1 = new \App\Payment\BillItem();
+    $billItem1->setName('a');
+    $billItem1->setPrice(1.1)->setQuantity(1)->totalAmount();
+
+    $bill->setBillItem($billItem1);
+    $bill->price();
+
+    $repository->insert($bill);
+
+    return view('welcome');
+});

@@ -61,7 +61,7 @@ class Bill implements BillInterface, Arrayable
     {
         return [
             'id'           => $this->id(),
-            'price'        => $this->price(),
+            'totalAmount'        => $this->price(),
         ];
     }
 }
