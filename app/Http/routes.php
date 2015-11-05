@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/sku/{id}', function (\App\Shopping\SKURepository $repository, $id) {
+    return $repository->find($id);
+});
+
 Route::get('/', function () {
     return view('welcome');
 });

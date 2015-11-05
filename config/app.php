@@ -146,6 +146,11 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /*
+         * Application Domain Service Providers
+         */
+        App\Shopping\SKURepositoryServiceProvider::class,
+
+        /*
          * IDE Helper
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,

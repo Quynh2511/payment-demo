@@ -1,8 +1,6 @@
 <?php
 
-namespace Contracts\PriceCaculation;
-
-use App\Contracts\PriceCaculation\PriceAspect;
+namespace App\Contracts\PriceCaculation;
 
 /**
  * Interface PriceAware
