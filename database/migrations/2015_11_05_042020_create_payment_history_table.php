@@ -14,7 +14,7 @@ class CreatePaymentHistoryTable extends Migration
     {
         Schema::create('payment_histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('billId')->references('id')->on('bills');
+            $table->integer('billId');
             $table->float('totalCost');
             $table->timestamps();
         });

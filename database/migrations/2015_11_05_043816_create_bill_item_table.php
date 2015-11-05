@@ -18,7 +18,7 @@ class CreateBillItemTable extends Migration
             $table->integer('quantity');
             $table->float('price');
             $table->float('totalAmount');
-            $table->foreign('billId')->references('id')->on('bills');
+            $table->integer('billId');
             $table->timestamps();
         });
     }
