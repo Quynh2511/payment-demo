@@ -8,5 +8,9 @@ namespace App\Contracts\PriceCaculation;
  */
 interface PriceAware
 {
+    /**
+     * @param PriceAspect $priceAspect
+     * @return self
+     */
     public function setPriceAspect(PriceAspect $priceAspect);
 }
