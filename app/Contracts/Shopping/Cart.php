@@ -20,8 +20,8 @@ interface Cart
     public function cartItem();
 
     /**
-     * @param $productId
+     * @param $skuId
      * @return self
      */
-    public function remove($productId);
+    public function remove($skuId);
 }

@@ -1,12 +1,7 @@
 <?php
 
 namespace App\Contracts\Shopping;
-use App\Contracts\PriceCaculation\PriceAspect;
 
-/**
- * Interface Product
- * @package App\Contracts
- */
 /**
  * Interface SKU
  * @package App\Contracts\Shopping
@@ -33,9 +28,4 @@ interface SKU
      */
     public function price();
 
-    /**
-     * @param PriceAspect $priceAspect
-     * @return self
-     */
-    public function setPriceAspect(PriceAspect $priceAspect);
 }
