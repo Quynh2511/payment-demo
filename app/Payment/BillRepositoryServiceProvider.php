@@ -17,7 +17,7 @@ class BillRepositoryServiceProvider extends ServiceProvider
     {
         $this->app->singleton(BillRepository::class, function ()
         {
-            return new BillRepository(\DB::connection());
+            return new BillRepository(\DB::connection(),new BillReader());
         });
     }
 }
