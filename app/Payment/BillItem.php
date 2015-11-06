@@ -3,12 +3,21 @@
 namespace App\Payment;
 
 
-class BillItem implements \App\Contracts\Paying\BillItem
+use App\Contracts\Paying\BillItem as BillItemInterface;
+use App\Contracts\Shopping\SKU;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+
+/**
+ * Class BillItem
+ * @package App\Payment
+ */
+class BillItem implements BillItemInterface, Arrayable, Jsonable
 {
     /**
-     * @var String
+     * @var SKU
      */
-    protected $name;
+    protected $sku;
 
     /**
      * @var int
@@ -16,21 +25,35 @@ class BillItem implements \App\Contracts\Paying\BillItem
     protected $quantity;
 
     /**
-     * @var float
+     * @param SKU $sku
+     * @param $quantity
      */
-    protected $price;
-
-    /**
-     * @var float
-     */
-    protected $totalAmount;
-
-    /**
-     * @return string
-     */
-    public function name()
+    public function __construct(SKU $sku, $quantity)
     {
-        return $this->name;
+        $this->sku      = $sku;
+        $this->quantity = $quantity;
+    }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'skuId'        => $this->sku()->id(),
+            'quantity'     => $this->quantity(),
+            'total-amount' => $this->totalAmount()
+        ];
+    }
+
+    /**
+     * @return SKU
+     */
+    public function sku()
+    {
+        return $this->sku;
     }
 
     /**
@@ -38,45 +61,7 @@ class BillItem implements \App\Contracts\Paying\BillItem
      */
     public function quantity()
     {
-       return $this->quantity;
-    }
-
-    /**
-     * @return float
-     */
-    public function price()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @param $quantity
-     * @return self
-     */
-    public function setQuantity($quantity)
-    {
-        $this->quantity = $quantity;
-
-        return $this;
-    }
-
-    /**
-     * @param $price
-     * @return self
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
+        return $this->quantity;
     }
 
     /**
@@ -84,7 +69,18 @@ class BillItem implements \App\Contracts\Paying\BillItem
      */
     public function totalAmount()
     {
-        $this->totalAmount = $this->price * $this->quantity;
-        return $this->totalAmount;
+        return $this->quantity() * $this->sku()->price();
     }
+
+    /**
+     * Convert the object to its JSON representation.
+     *
+     * @param  int $options
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->toArray(), $options);
+    }
+
 }
