@@ -149,6 +149,7 @@ return [
          * Application Domain Service Providers
          */
         App\Shopping\SKURepositoryServiceProvider::class,
+        App\Payment\BillRepositoryServiceProvider::class,
 
         /*
          * IDE Helper

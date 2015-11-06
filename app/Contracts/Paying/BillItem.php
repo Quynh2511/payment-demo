@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Contracts\Paying;
+use App\Contracts\Shopping\SKU;
 
 /**
  * Interface BillItem
@@ -8,20 +9,16 @@ namespace App\Contracts\Paying;
  */
 interface BillItem
 {
+
     /**
-     * @return string
+     * @return SKU
      */
-    public function name();
+    public function sku();
 
     /**
      * @return int
      */
     public function quantity();
-
-    /**
-     * @return float
-     */
-    public function price();
 
     /**
      * @return float

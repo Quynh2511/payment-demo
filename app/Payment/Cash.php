@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: cuuthegioi
- * Date: 11/5/15
- * Time: 10:23 AM
- */
 
 namespace App\Payment;
 

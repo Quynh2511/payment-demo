@@ -6,5 +6,26 @@ use App\Contracts\Member\Member as MemberInterface;
 
 class Member implements MemberInterface
 {
-    //TODO must implement logic
+    /**
+     * @var int
+     */
+    protected $id;
+
+     /**
+     * @return int
+     */
+    public function id()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
 }
