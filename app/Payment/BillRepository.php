@@ -34,6 +34,8 @@ class BillRepository
 
     /**
      * @param Bill $bill
+     * @throws SaveBillException
+     * @throws \Exception
      */
     public function save(Bill $bill)
     {
