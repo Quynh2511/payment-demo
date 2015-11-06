@@ -22,14 +22,17 @@ class BillRepository
      */
     protected $billReader;
 
+    protected $billFactory;
+
     /**
      * @param Connection $connection
      * @param BillReader $billReader
      */
-    public function __construct(Connection $connection, BillReader $billReader)
+    public function __construct(Connection $connection, BillReader $billReader, BillFactory $billFactory)
     {
-        $this->connection = $connection;
-        $this->billReader = $billReader;
+        $this->connection   = $connection;
+        $this->billReader   = $billReader;
+        $this->billFactory  = $billFactory;
     }
 
     /**
@@ -59,5 +62,15 @@ class BillRepository
             throw $saveBillException;
         }
 
+    }
+
+    public function getBillsByMember($memberId)
+    {
+        $rawData = $this->connection->query()->from('bills')
+                                    ->join('bill_items','id','=','bill_items.billId')
+                                    ->where('memberId','=',$memberId)
+                                    ->get();
+
+        return $this->billFactory->buildAll($rawData);
     }
 }
