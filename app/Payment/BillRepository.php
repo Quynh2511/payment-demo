@@ -6,6 +6,10 @@ use App\Contracts\Paying\Bill;
 use Illuminate\Database\Connection;
 use Mockery\Exception;
 
+/**
+ * Class BillRepository
+ * @package App\Payment
+ */
 class BillRepository
 {
     /**
