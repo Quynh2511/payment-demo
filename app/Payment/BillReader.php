@@ -11,6 +11,10 @@ namespace App\Payment;
 
 class BillReader
 {
+    /**
+     * @param Bill $bill
+     * @return array
+     */
     public function readBillData(Bill $bill)
     {
         $rawBillData = [
