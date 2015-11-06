@@ -3,22 +3,46 @@
 namespace App\Shopping;
 
 use App\Contracts\Member\Member;
-use App\Contracts\PriceCaculation\PriceAware;
+use App\PriceAspect\PromotionAspect;
 use App\PriceAspect\TaxAspect;
-use App\PriceAspect\VipAspect;
+use App\Shopping\DurationPromotionFinder\DurationPromotionFinderService;
 
+/**
+ * Class PriceAspectDecorator
+ * @package App\Shopping
+ */
 class PriceAspectDecorator
 {
+    /**
+     * @var Member
+     */
     protected $member;
 
-    public function __construct(Member $member)
+    /**
+     * @var DurationPromotionFinderService
+     */
+    protected $promotionFinder;
+
+    /**
+     * @param Member $member
+     * @param DurationPromotionFinderService $promotionFinderService
+     */
+    public function __construct(Member $member, DurationPromotionFinderService $promotionFinderService)
     {
-        $this->member = $member;
+        $this->member          = $member;
+        $this->promotionFinder = $promotionFinderService;
     }
 
-    public function decorate(PriceAware $priceAware)
+    /**
+     * @param SKU $sku
+     */
+    public function decorate(SKU $sku)
     {
-        //TODO must implement logic for price aspect
-        $priceAware->setPriceAspect(new TaxAspect(0.1))->setPriceAspect(new VipAspect(0.3));
+        if ($promotion = $this->promotionFinder->getPromotionFor($sku))
+        {
+            $sku->setPriceAspect(new PromotionAspect($promotion->getRatio()));
+        }
+
+        $sku->setPriceAspect(new TaxAspect(0.1));
     }
 }

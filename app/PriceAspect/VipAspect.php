@@ -10,11 +10,22 @@ namespace App\PriceAspect;
 
 
 use App\Contracts\PriceCaculation\PriceAspect;
+use App\Contracts\PriceCaculation\PriceAspectType;
 
+/**
+ * Class VipAspect
+ * @package App\PriceAspect
+ */
 class VipAspect implements PriceAspect
 {
+    /**
+     * @var
+     */
     protected $ratio;
 
+    /**
+     * @param $ratio
+     */
     public function __construct($ratio)
     {
         $this->ratio = $ratio;
@@ -26,5 +37,29 @@ class VipAspect implements PriceAspect
     public function alter($price)
     {
         return $price * (1 - $this->ratio);
+    }
+
+    /**
+     * @return string
+     */
+    public function name()
+    {
+        return 'Member Discount';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function value()
+    {
+        return $this->ratio;
+    }
+
+    /**
+     * @return string
+     */
+    public function type()
+    {
+        return PriceAspectType::TYPE_VIP_MEMBER;
     }
 }

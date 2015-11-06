@@ -10,6 +10,8 @@ class SKURepository
 
     protected $factory;
 
+    protected $table = 'products';
+
     public function __construct(Connection $connection, SKUFactory $factory)
     {
         $this->connection = $connection;
@@ -25,5 +27,13 @@ class SKURepository
         $raw = $this->connection->query()->where('id', '=', $id)->from('products')->get();
 
         return $this->factory->buildOne($raw);
+    }
+
+    public function fetchAll()
+    {
+        $raw = $this->connection->query()->from($this->table)->get();
+
+        return $this->factory->buildMany($raw);
+
     }
 }

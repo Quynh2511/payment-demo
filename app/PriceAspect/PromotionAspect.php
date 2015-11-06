@@ -5,19 +5,23 @@ namespace App\PriceAspect;
 use App\Contracts\PriceCaculation\PriceAspect;
 use App\Contracts\PriceCaculation\PriceAspectType;
 
-class TaxAspect implements PriceAspect
+/**
+ * Class PromotionAspect
+ * @package App\PriceAspect
+ */
+class PromotionAspect implements PriceAspect
 {
     /**
-     * @var float
+     * @var
      */
-    protected $tax;
+    protected $ratio;
 
     /**
-     * @param float $tax
+     * @param $ratio
      */
-    public function __construct($tax)
+    public function __construct($ratio)
     {
-        $this->tax = $tax;
+        $this->ratio = $ratio;
     }
 
     /**
@@ -26,7 +30,7 @@ class TaxAspect implements PriceAspect
      */
     public function alter($price)
     {
-        return $price * (1 + $this->tax);
+        return $price * (1 - $this->ratio);
     }
 
     /**
@@ -34,7 +38,7 @@ class TaxAspect implements PriceAspect
      */
     public function name()
     {
-        return 'VAT';
+        return 'Independent Day Sale Off';
     }
 
     /**
@@ -42,7 +46,7 @@ class TaxAspect implements PriceAspect
      */
     public function value()
     {
-        return $this->tax;
+        return $this->ratio;
     }
 
     /**
@@ -50,8 +54,6 @@ class TaxAspect implements PriceAspect
      */
     public function type()
     {
-        return PriceAspectType::TYPE_TAX;
+        return PriceAspectType::TYPE_PROMOTE;
     }
-
-
 }
