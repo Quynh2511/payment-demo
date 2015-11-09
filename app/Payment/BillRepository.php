@@ -48,7 +48,7 @@ class BillRepository
      */
     public function save(Bill $bill)
     {
-         \DB::beginTransaction();
+        $this->connection->beginTransaction();
 
         try {
 
@@ -59,13 +59,13 @@ class BillRepository
             $this->connection->table('bill_items')
                             ->insert($this->billReader->readBillItem($bill->all(), $billId));
 
-            \DB::commit();
+            $this->connection->commit();
         }
-        catch (SaveBillException $saveBillException) {
+        catch (\Exception $exception) {
 
-            \DB::rollBack();
+            $this->connection->rollBack();
 
-            throw $saveBillException;
+            throw new SaveBillException("Save bill failure: Caught database exception.", 1, $exception);
         }
 
     }
