@@ -4,6 +4,10 @@ namespace App\Payment;
 
 use App\Member\Member;
 
+/**
+ * Class BillFactory
+ * @package App\Payment
+ */
 class BillFactory
 {
     /**
@@ -12,13 +16,9 @@ class BillFactory
     protected $member;
 
     /**
-     * @param Member $member
+     * @param $rawData
+     * @return Bill
      */
-    public function __construct(Member $member)
-    {
-        $this->member = $member;
-    }
-
     public function buildOne($rawData)
     {
         if( ! count($rawData)) return null;
@@ -26,6 +26,8 @@ class BillFactory
         $row  = $rawData[0];
         $bill = new Bill();
         $bill->setId($row->id);
+
+        return $bill;
     }
 
     /**
@@ -34,6 +36,8 @@ class BillFactory
      */
     public function buildAll($rawData)
     {
+        if( ! count($rawData)) return null;
+
         $billList = [];
         $bill = new Bill();
 

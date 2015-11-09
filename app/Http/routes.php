@@ -22,4 +22,6 @@ Route::get('/', function (DurationPromotionFinderService $sv, SKURepository $rep
 Route::get('/sku/{id}', ['uses' => 'ProductController@show']);
 Route::get('/sku', ['uses' => 'ProductController@index']);
 
-
+Route::get('/bill/{id}', function(\App\Payment\BillRepository $billRepo){
+    $billList = $billRepo->getBillsByMember(12);
+});

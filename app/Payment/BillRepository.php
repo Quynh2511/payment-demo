@@ -22,15 +22,20 @@ class BillRepository
      */
     protected $billReader;
 
+    /**
+     * @var BillFactory
+     */
     protected $billFactory;
 
+    /**
+     * @var
+     */
     protected $billItemFactory;
 
     /**
      * @param Connection $connection
      * @param BillReader $billReader
      * @param BillFactory $billFactory
-     * @param BillItemFactory $billItemFactory
      */
     public function __construct(Connection $connection
                             , BillReader $billReader
@@ -70,6 +75,10 @@ class BillRepository
 
     }
 
+    /**
+     * @param $memberId
+     * @return Bill[]
+     */
     public function getBillsByMember($memberId)
     {
         $rawData = $this->connection->query()->from('bills')
