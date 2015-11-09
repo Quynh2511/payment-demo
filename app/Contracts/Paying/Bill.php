@@ -3,6 +3,7 @@
 namespace App\Contracts\Paying;
 
 use App\Contracts\Member\Member;
+use DateTime;
 
 /**
  * Interface Bill
@@ -35,4 +36,14 @@ interface Bill
      * @return float
      */
     public function price();
+
+    /**
+     * @return float
+     */
+    public function totalAmount();
+
+    /**
+     * @return Datetime
+     */
+    public function purchaseDate();
 }

@@ -23,13 +23,30 @@ class BillRepository
     protected $billReader;
 
     /**
+     * @var BillFactory
+     */
+    protected $billFactory;
+
+    /**
+     * @var
+     */
+    protected $billItemFactory;
+
+    /**
      * @param Connection $connection
      * @param BillReader $billReader
+     * @param BillFactory $billFactory
      */
-    public function __construct(Connection $connection, BillReader $billReader)
+    public function __construct
+    (
+        Connection  $connection,
+        BillReader  $billReader,
+        BillFactory $billFactory
+    )
     {
-        $this->connection = $connection;
-        $this->billReader = $billReader;
+        $this->connection       = $connection;
+        $this->billReader       = $billReader;
+        $this->billFactory      = $billFactory;
     }
 
     /**
@@ -61,5 +78,18 @@ class BillRepository
             throw new SaveBillException("Save bill failure: Caught database exception.", 1, $exception);
         }
 
+    }
+
+    /**
+     * @param $memberId
+     * @return Bill[]
+     */
+    public function getBillsByMember($memberId)
+    {
+        $rawData = $this->connection->query()->from('bills')
+                                            ->where('memberId','=',$memberId)
+                                            ->get();
+
+        return $this->billFactory->buildAll($rawData);
     }
 }

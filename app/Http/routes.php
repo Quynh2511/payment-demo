@@ -22,4 +22,9 @@ Route::get('/', function (DurationPromotionFinderService $sv, SKURepository $rep
 Route::get('/sku/{id}', ['uses' => 'ProductController@show']);
 Route::get('/sku', ['uses' => 'ProductController@index']);
 
+Route::get('/bill/{id}', function(\App\Payment\BillRepository $billRepo, $id){
+    $billList = $billRepo->getBillsByMember($id);
+    $billListPresenter = new \App\Payment\Presenters\BillListJsonPresenter($billList);
 
+    return $billListPresenter;
+});
