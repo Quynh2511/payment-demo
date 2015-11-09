@@ -20,4 +20,6 @@ interface PriceAspectType
      *
      */
     const TYPE_VIP_MEMBER = 'TYPE_VIP_MEMBER';
+
+    const TYPE_MEMBER = 'TYPE_MEMBER';
 }

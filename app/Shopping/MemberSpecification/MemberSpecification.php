@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: tienvm
- * Date: 11/9/15
- * Time: 11:17 AM
- */
 
 namespace App\Shopping\MemberSpecification;
 
-
-use App\Member\Member;
+use App\Contracts\Member\Member;
 use Illuminate\Database\Connection;
 
 class MemberSpecification

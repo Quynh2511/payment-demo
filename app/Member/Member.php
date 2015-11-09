@@ -25,17 +25,7 @@ class Member implements MemberInterface
      */
     public function id()
     {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return self
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
+        return 2;
     }
 
     /**
@@ -59,14 +49,8 @@ class Member implements MemberInterface
      */
     public function memberType()
     {
-        return $this->member_type;
+        return [9];
     }
 
-    /**
-     * @param $memberType
-     */
-    public function setMemberType()
-    {
-    }
 
 }

@@ -6,7 +6,6 @@ use App\Contracts\Member\Member;
 use App\PriceAspect\PromotionAspect;
 use App\PriceAspect\TaxAspect;
 use App\Shopping\DurationPromotionFinder\DurationPromotionFinderService;
-use App\Shopping\MemberSpecification\MemberSpecification;
 
 /**
  * Class PriceAspectDecorator
@@ -24,22 +23,25 @@ class PriceAspectDecorator
      */
     protected $promotionFinder;
 
-    protected $memberSpecification;
+    /**
+     * @var PriceAspectFromMemberFactory
+     */
+    protected $factory;
 
     /**
      * @param Member $member
      * @param DurationPromotionFinderService $promotionFinderService
-     * @param MemberSpecification $memberSpecification
+     * @param PriceAspectFromMemberFactory $aspectFromMemberFactory
      */
     public function __construct(
         Member                         $member,
-        MemberSpecification            $memberSpecification,
-        DurationPromotionFinderService $promotionFinderService
+        DurationPromotionFinderService $promotionFinderService,
+        PriceAspectFromMemberFactory   $aspectFromMemberFactory
     )
     {
         $this->member              = $member;
-        $this->memberSpecification = $memberSpecification;
         $this->promotionFinder     = $promotionFinderService;
+        $this->factory             = $aspectFromMemberFactory;
     }
 
     /**
@@ -47,8 +49,11 @@ class PriceAspectDecorator
      */
     public function decorate(SKU $sku)
     {
-
-        $this->memberSpecification->memberType($this->member);
+        foreach($this->member->memberType() as $memberType)
+        {
+            $priceAspect = $this->factory->makePriceAspect($memberType);
+            $sku->setPriceAspect($priceAspect);
+        }
 
         if ($promotion = $this->promotionFinder->getPromotionFor($sku))
         {
