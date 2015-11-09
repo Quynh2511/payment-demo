@@ -39,10 +39,9 @@ class BillFactory
         if( ! count($rawData)) return null;
 
         $billList = [];
-        $bill = new Bill();
-
         foreach($rawData as $rawBill)
         {
+            $bill = new Bill();
             $bill->setId($rawBill->id);
 
             array_push($billList, $bill);

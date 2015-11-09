@@ -25,6 +25,11 @@ class BillItem implements BillItemInterface, Arrayable, Jsonable
     protected $quantity;
 
     /**
+     * @var float
+     */
+    protected $totalAmount;
+
+    /**
      * @param SKU $sku
      * @param $quantity
      */
@@ -62,6 +67,25 @@ class BillItem implements BillItemInterface, Arrayable, Jsonable
     public function quantity()
     {
         return $this->quantity;
+    }
+
+    /**
+     * @param float $amount
+     * @return self
+     */
+    public function setTotalAmount($amount)
+    {
+        $this->totalAmount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalAmount()
+    {
+        return $this->totalAmount;
     }
 
     /**

@@ -27,6 +27,7 @@ class BillItemFactory
             $sku->setId($row->productId);
 
             $billItem = new BillItem($sku, $row->quantity);
+            $billItem->setTotalAmount($row->totalAmount);
 
             array_push($billItemList, $billItem);
         }
