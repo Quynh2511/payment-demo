@@ -5,8 +5,7 @@ namespace App\Payment;
 use App\Contracts\Member\Member;
 use App\Contracts\Paying\BillItem;
 use App\Contracts\Paying\Bill as BillInterface;
-use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Contracts\Support\Jsonable;
+use DateTime;
 
 /**
  * Class Bill
@@ -33,6 +32,11 @@ class Bill implements BillInterface
      * @var BillItem[]
      */
     protected $billItems = [];
+
+    /**
+     * @var
+     */
+    protected $purchaseDate;
 
     /**
      * @param Member $member
@@ -121,5 +125,21 @@ class Bill implements BillInterface
     public function member()
     {
         return $this->member;
+    }
+
+    /**
+     * @return Datetime
+     */
+    public function purchaseDate()
+    {
+        return $this->purchaseDate;
+    }
+
+    /**
+     * @param Datetime $purchaseDate
+     */
+    public function setPurchaseDate($purchaseDate)
+    {
+        $this->purchaseDate = $purchaseDate;
     }
 }

@@ -24,4 +24,9 @@ interface BillItem
      * @return float
      */
     public function totalAmount();
+
+    /**
+     * @return float
+     */
+    public function getTotalAmount();
 }

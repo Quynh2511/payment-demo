@@ -46,7 +46,7 @@ class BillFactory
             $bill = new Bill();
             $bill->setId($rawBill->id);
             $bill->setTotalAmount($rawBill->totalAmount);
-
+            $bill->setPurchaseDate($rawBill->created_at);
             array_push($billList, $bill);
         }
         return $billList;
