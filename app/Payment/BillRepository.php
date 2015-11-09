@@ -34,13 +34,11 @@ class BillRepository
      */
     public function __construct(Connection $connection
                             , BillReader $billReader
-                            , BillFactory $billFactory
-                            , BillItemFactory $billItemFactory)
+                            , BillFactory $billFactory)
     {
         $this->connection       = $connection;
         $this->billReader       = $billReader;
         $this->billFactory      = $billFactory;
-        $this->billItemFactory  = $billItemFactory;
     }
 
     /**
@@ -79,14 +77,5 @@ class BillRepository
                                             ->get();
 
         return $this->billFactory->buildAll($rawData);
-    }
-
-    public function getBillItemList($billId)
-    {
-        $rawData = $this->connection->query()->from('bill_items')
-                                            ->where('billId', '=', $billId)
-                                            ->get();
-
-        return $this->billItemFactory->makeBillItemList($rawData);
     }
 }

@@ -30,18 +30,19 @@ class BillFactory
 
     /**
      * @param $rawData
+     * @return Bill[]
      */
     public function buildAll($rawData)
     {
-        $bills = [];
+        $billList = [];
         $bill = new Bill();
 
         foreach($rawData as $rawBill)
         {
             $bill->setId($rawBill->id);
 
-            array_push($bills, $bill);
+            array_push($billList, $bill);
         }
-        return;
+        return $billList;
     }
 }

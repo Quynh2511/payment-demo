@@ -13,7 +13,7 @@ class BillItemFactory
 {
     /**
      * @param $rawData
-     * @return null|void
+     * @return BillItem[]
      */
     public function makeBillItemList($rawData)
     {
@@ -30,6 +30,6 @@ class BillItemFactory
 
             array_push($billItemList, $billItem);
         }
-        return;
+        return $billItemList;
     }
 }
