@@ -24,15 +24,23 @@ class BillRepository
 
     protected $billFactory;
 
+    protected $billItemFactory;
+
     /**
      * @param Connection $connection
      * @param BillReader $billReader
+     * @param BillFactory $billFactory
+     * @param BillItemFactory $billItemFactory
      */
-    public function __construct(Connection $connection, BillReader $billReader, BillFactory $billFactory)
+    public function __construct(Connection $connection
+                            , BillReader $billReader
+                            , BillFactory $billFactory
+                            , BillItemFactory $billItemFactory)
     {
-        $this->connection   = $connection;
-        $this->billReader   = $billReader;
-        $this->billFactory  = $billFactory;
+        $this->connection       = $connection;
+        $this->billReader       = $billReader;
+        $this->billFactory      = $billFactory;
+        $this->billItemFactory  = $billItemFactory;
     }
 
     /**
@@ -67,10 +75,18 @@ class BillRepository
     public function getBillsByMember($memberId)
     {
         $rawData = $this->connection->query()->from('bills')
-                                    ->join('bill_items','id','=','bill_items.billId')
-                                    ->where('memberId','=',$memberId)
-                                    ->get();
+                                            ->where('memberId','=',$memberId)
+                                            ->get();
 
         return $this->billFactory->buildAll($rawData);
+    }
+
+    public function getBillItemList($billId)
+    {
+        $rawData = $this->connection->query()->from('bill_items')
+                                            ->where('billId', '=', $billId)
+                                            ->get();
+
+        return $this->billItemFactory->makeBillItemList($rawData);
     }
 }
