@@ -38,6 +38,8 @@ class PriceAspectDecorator
      */
     public function decorate(SKU $sku)
     {
+
+
         if ($promotion = $this->promotionFinder->getPromotionFor($sku))
         {
             $sku->setPriceAspect(new PromotionAspect($promotion->getRatio()));
