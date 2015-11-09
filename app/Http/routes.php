@@ -1,5 +1,8 @@
 <?php
 
+use App\Shopping\DurationPromotionFinder\DurationPromotionFinderService;
+use App\Shopping\SKURepository;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,10 +14,12 @@
 |
 */
 
-Route::get('/sku/{id}', function (\App\Shopping\SKURepository $repository, $id) {
-    return $repository->find($id);
+Route::get('/', function (DurationPromotionFinderService $sv, SKURepository $repository) {
+    $sku = $repository->find(1);
+    dd($sv->getPromotionFor($sku));
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/sku/{id}', ['uses' => 'ProductController@show']);
+Route::get('/sku', ['uses' => 'ProductController@index']);
+
+

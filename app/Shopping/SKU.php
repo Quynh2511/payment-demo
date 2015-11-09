@@ -113,11 +113,27 @@ class SKU implements SKUInterface, Jsonable, Arrayable, PriceAware
 
     public function toArray()
     {
+        $priceAspects = [];
+
+        foreach ($this->appliedPriceAspects as $aspect)
+        {
+            $aspectSerializedData = [
+                'name'  => $aspect->name(),
+                'type'  => $aspect->type(),
+                'value' => $aspect->value()
+            ];
+
+            array_push($priceAspects, $aspectSerializedData);
+        }
+
         return [
             'id'           => $this->id(),
             'name'         => $this->name(),
-            'price'        => $this->price(),
-            'origin-price' => $this->originPrice()
+            'pricing'      => [
+                'price'        => $this->price(),
+                'origin-price' => $this->originPrice(),
+                'aspects'      => $priceAspects
+            ]
         ];
     }
 
@@ -133,6 +149,4 @@ class SKU implements SKUInterface, Jsonable, Arrayable, PriceAware
 
         return $this;
     }
-
-
 }

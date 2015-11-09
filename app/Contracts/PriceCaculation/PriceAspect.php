@@ -9,6 +9,21 @@ namespace App\Contracts\PriceCaculation;
 interface PriceAspect
 {
     /**
+     * @return string
+     */
+    public function name();
+
+    /**
+     * @return mixed
+     */
+    public function value();
+
+    /**
+     * @return string
+     */
+    public function type();
+
+    /**
      * @param float $price
      * @return float
      */
