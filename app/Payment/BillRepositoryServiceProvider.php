@@ -2,7 +2,6 @@
 
 namespace App\Payment;
 
-
 use Illuminate\Support\ServiceProvider;
 
 class BillRepositoryServiceProvider extends ServiceProvider

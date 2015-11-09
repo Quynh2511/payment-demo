@@ -55,7 +55,8 @@ class BillRepository
     {
         $this->connection->beginTransaction();
 
-        try {
+        try
+        {
 
             $billId = $this->connection
                             ->table('bills')
@@ -66,7 +67,8 @@ class BillRepository
 
             $this->connection->commit();
         }
-        catch (\Exception $exception) {
+        catch (\Exception $exception)
+        {
 
             $this->connection->rollBack();
 
