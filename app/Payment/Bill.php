@@ -12,7 +12,7 @@ use Illuminate\Contracts\Support\Jsonable;
  * Class Bill
  * @package App\Payment
  */
-class Bill implements BillInterface, Arrayable, Jsonable
+class Bill implements BillInterface
 {
 
     /**
@@ -25,6 +25,10 @@ class Bill implements BillInterface, Arrayable, Jsonable
      */
     protected $id;
 
+    /**
+     * @var float
+     */
+    protected $totalAmount;
     /**
      * @var BillItem[]
      */
@@ -85,36 +89,22 @@ class Bill implements BillInterface, Arrayable, Jsonable
     }
 
     /**
-     * Get the instance as an array.
-     *
-     * @return array
+     * @return float
      */
-    public function toArray()
+    public function totalAmount()
     {
-        $itemsArray = [];
+        return $this->totalAmount;
+    }
 
-        foreach ($this->billItems as $item)
-        {
-            $itemArray = [
-                'sku' => [
-                    'id'             => $item->sku()->id(),
-                    'name'           => $item->sku()->name(),
-                    'price'          => $item->sku()->price(),
-                    'original-price' => $item->sku()->originPrice(),
-                ],
-                'quantity'     => $item->quantity(),
-                'total-amount' => $item->totalAmount()
-            ];
+    /**
+     * @param float $amount
+     * @return self
+     */
+    public function setTotalAmount($amount)
+    {
+        $this->totalAmount = $amount;
 
-            array_push($itemsArray, $itemArray);
-        }
-        
-        return [
-            'id'           => $this->id(),
-            'total-amount' => $this->price(),
-            'items'        => $itemsArray,
-            'member-id'    => $this->member()->id()
-        ];
+        return $this;
     }
 
     /**
@@ -123,17 +113,6 @@ class Bill implements BillInterface, Arrayable, Jsonable
     public function all()
     {
         return $this->billItems;
-    }
-
-    /**
-     * Convert the object to its JSON representation.
-     *
-     * @param  int $options
-     * @return string
-     */
-    public function toJson($options = 0)
-    {
-        return json_encode($this->toArray(), $options);
     }
 
     /**

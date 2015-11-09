@@ -26,6 +26,7 @@ class BillFactory
         $row  = $rawData[0];
         $bill = new Bill();
         $bill->setId($row->id);
+        $bill->setTotalAmount($row->totalAmount);
 
         return $bill;
     }
@@ -39,10 +40,12 @@ class BillFactory
         if( ! count($rawData)) return null;
 
         $billList = [];
+
         foreach($rawData as $rawBill)
         {
             $bill = new Bill();
             $bill->setId($rawBill->id);
+            $bill->setTotalAmount($rawBill->totalAmount);
 
             array_push($billList, $bill);
         }
