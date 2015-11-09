@@ -2,7 +2,6 @@
 
 namespace App\Payment;
 
-
 use App\Shopping\SKU;
 
 /**
