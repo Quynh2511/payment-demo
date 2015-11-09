@@ -22,20 +22,17 @@ class SKURepositoryServiceProvider extends ServiceProvider
 
         $this->app->singleton(SKURepository::class, function ()
         {
+            /** @var DurationPromotionFinderService $finderService */
+            $finderService = $this->app->make(DurationPromotionFinderService::class);
+            $finderService->initialize();
+
             return new SKURepository(
                 \DB::connection(),
                 new SKUFactory(
-                    new PriceAspectDecorator(new Member(), $this->app->make(DurationPromotionFinderService::class))
+                    new PriceAspectDecorator(new Member(), $finderService)
                 )
             );
         });
-    }
-
-    public function boot()
-    {
-        /** @var DurationPromotionFinderService $finderService */
-        $finderService = $this->app->make(DurationPromotionFinderService::class);
-        $finderService->initialize();
     }
 
     public function provides()
