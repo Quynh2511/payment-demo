@@ -3,6 +3,9 @@
 namespace App\Payment;
 
 
+use App\Contracts\Paying\Bill;
+use App\Contracts\Paying\BillItem;
+
 /**
  * Class BillReader
  * @package App\Payment
