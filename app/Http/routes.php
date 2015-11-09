@@ -24,6 +24,7 @@ Route::get('/sku', ['uses' => 'ProductController@index']);
 
 Route::get('/bill/{id}', function(\App\Payment\BillRepository $billRepo, $id){
     $billList = $billRepo->getBillsByMember($id);
+    $billListPresenter = new \App\Payment\Presenters\BillListJsonPresenter($billList);
 
-    dd($billList);
+    return $billListPresenter;
 });

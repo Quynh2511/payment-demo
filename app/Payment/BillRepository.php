@@ -37,9 +37,12 @@ class BillRepository
      * @param BillReader $billReader
      * @param BillFactory $billFactory
      */
-    public function __construct(Connection $connection
-                            , BillReader $billReader
-                            , BillFactory $billFactory)
+    public function __construct
+    (
+        Connection  $connection,
+        BillReader  $billReader,
+        BillFactory $billFactory
+    )
     {
         $this->connection       = $connection;
         $this->billReader       = $billReader;

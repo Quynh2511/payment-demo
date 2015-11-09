@@ -50,7 +50,6 @@ class BillListJsonPresenter implements Arrayable,Jsonable
                 'purchase-date' => $bill->purchaseDate()
             ]);
         }
-
         return $rawListBill;
     }
 
@@ -62,6 +61,6 @@ class BillListJsonPresenter implements Arrayable,Jsonable
      */
     public function toJson($options = 0)
     {
-        json_decode($this->toArray(), $options);
+       return json_encode($this->toArray(), $options);
     }
 }
