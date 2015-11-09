@@ -62,6 +62,6 @@ class BillListJsonPresenter implements Arrayable,Jsonable
      */
     public function toJson($options = 0)
     {
-        json_decode($this->toArray());
+        json_decode($this->toArray(), $options);
     }
 }
